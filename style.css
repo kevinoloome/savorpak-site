@@ -81,7 +81,7 @@ a:hover { color: var(--ink); }
   font-size: 1.25rem;
   letter-spacing: -0.02em;
 }
-.brand svg { width: 24px; height: 31px; flex: none; }
+.brand img { display: block; height: 30px; width: auto; }
 
 .site-nav { display: flex; align-items: center; gap: 8px 20px; flex-wrap: wrap; }
 .site-nav a { color: var(--ink); text-decoration: none; font-weight: 600; }
@@ -314,6 +314,7 @@ a:hover { color: var(--ink); }
 .contact-list li { border-top: 1px solid var(--line); padding-top: 8px; margin-bottom: 0; }
 .contact-list strong { display: block; font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
 .contact-list a, .contact-list .contact-text { font-size: 1.15rem; font-weight: 700; }
+.contact-list a.btn { font-size: 1rem; margin-top: 4px; }
 
 .updated { color: var(--ink-soft); font-size: 0.95rem; }
 
