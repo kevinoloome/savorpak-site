@@ -1,0 +1,347 @@
+/* Savorpak — static site styles. No external fonts or requests. Compact layout: less scrolling. */
+
+:root {
+  --ink: #0a2a3a;
+  --ink-soft: #3c5766;
+  --water: #1abbe3;
+  --water-deep: #0d6f92;
+  --foam: #e6f8fc;
+  --band: #d8f4fa;
+  --white: #ffffff;
+  --line: #c4e7f1;
+  --radius: 14px;
+  --font: "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--white);
+}
+
+img, svg { max-width: 100%; height: auto; }
+
+a { color: var(--water-deep); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: 8px;
+  z-index: 10;
+}
+.skip:focus { left: 8px; }
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Header ------------------------------------------------------------ */
+
+.site-header { border-bottom: 1px solid var(--line); background: var(--white); }
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.brand svg { width: 24px; height: 31px; flex: none; }
+
+.site-nav { display: flex; align-items: center; gap: 8px 20px; flex-wrap: wrap; }
+.site-nav a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.site-nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
+.site-nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--water); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+
+/* Buttons ----------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--water); color: var(--ink); }
+.btn-primary:hover { background: var(--ink); color: var(--white); }
+.btn-ghost { border-color: var(--water); color: var(--ink); background: transparent; }
+.btn-ghost:hover { background: var(--water); color: var(--ink); }
+.site-nav .btn-primary { color: var(--ink); padding: 8px 16px; }
+.site-nav .btn-primary:hover { color: var(--white); text-decoration: none; }
+
+/* Hero banner (slider) ---------------------------------------------- */
+
+.hero { background: var(--foam); overflow: hidden; }
+
+.hero .wrap { padding-top: 22px; padding-bottom: 12px; }
+
+/* Slides share one grid cell so the height never jumps */
+.slides { display: grid; }
+
+.slide {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+.slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
+}
+
+.hero h1, .hero .slide-title {
+  margin: 0 0 10px;
+  font-size: clamp(1.65rem, 6.4vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  max-width: 18ch;
+}
+
+.hero p.lead {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  max-width: 38ch;
+}
+
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.slide-visual { display: grid; place-items: center; }
+
+.bottle { display: block; width: 84px; }
+
+.qr-card {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 10px 10px 8px;
+  width: 170px;
+  text-align: center;
+}
+.qr-card img { display: block; width: 100%; }
+.qr-card p { margin: 4px 0 0; font-weight: 800; font-size: 1rem; }
+
+.slider-controls { display: none; align-items: center; gap: 6px; padding-top: 12px; }
+.js .slider-controls { display: flex; }
+
+.sl-arrow, .sl-pause {
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.sl-arrow { width: 34px; height: 34px; font-size: 1.15rem; line-height: 1; }
+.sl-pause { padding: 5px 14px; font-size: 0.9rem; margin-left: 6px; }
+.sl-arrow:hover, .sl-pause:hover { background: var(--water); }
+
+.sl-dots { display: flex; gap: 2px; }
+.sl-dot {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.sl-dot::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: transparent;
+}
+.sl-dot[aria-current="true"]::before { background: var(--water); }
+
+.water-fill { transform: translateY(0); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide.is-active .water-fill {
+    animation: fill 2.6s cubic-bezier(.3, .6, .25, 1) 0.2s both;
+  }
+  .wave { animation: sway 3.2s ease-in-out infinite alternate; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .slide.is-active { transition: none; }
+}
+
+@keyframes fill {
+  from { transform: translateY(250px); }
+  to   { transform: translateY(0); }
+}
+@keyframes sway {
+  from { transform: translateX(-14px); }
+  to   { transform: translateX(14px); }
+}
+
+/* Info: About + How it works side by side ---------------------------- */
+
+.info { padding: 22px 0 26px; }
+.info .wrap { display: grid; grid-template-columns: 1fr; gap: 18px; }
+
+.info h2 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+.info p { margin: 0; max-width: 52ch; }
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 44px;
+  min-height: 34px;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--water);
+  color: var(--ink);
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.steps h3 { margin: 0; font-size: 1.02rem; letter-spacing: -0.01em; line-height: 1.3; }
+.steps p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.4; max-width: 34ch; }
+
+/* Get-the-app band ---------------------------------------------------- */
+
+.band { background: var(--band); color: var(--ink); }
+.band .wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.band h2 { color: var(--ink); margin: 0 0 4px; font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.2; }
+.band p { margin: 0 0 10px; color: var(--ink-soft); font-size: 0.95rem; max-width: 40ch; line-height: 1.4; }
+
+.qr {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 7px;
+  width: 108px;
+}
+.qr img { display: block; width: 100%; }
+
+/* Content pages ------------------------------------------------------ */
+
+.page { padding: 26px 0 36px; }
+.page h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+.page .intro { color: var(--ink-soft); max-width: 60ch; margin: 0 0 16px; font-size: 1.05rem; }
+.page h2 { margin: 20px 0 4px; font-size: 1.15rem; letter-spacing: -0.01em; }
+.page p, .page li { max-width: 72ch; margin-top: 0; margin-bottom: 8px; }
+.page ul { padding-left: 1.2rem; margin: 0; }
+
+.page .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; max-width: 520px; }
+.contact-list li { border-top: 1px solid var(--line); padding-top: 8px; margin-bottom: 0; }
+.contact-list strong { display: block; font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
+.contact-list a, .contact-list .contact-text { font-size: 1.15rem; font-weight: 700; }
+
+.updated { color: var(--ink-soft); font-size: 0.95rem; }
+
+/* Footer ------------------------------------------------------------ */
+
+.site-footer { border-top: 1px solid var(--line); padding: 14px 0 18px; font-size: 0.92rem; color: var(--ink-soft); }
+.site-footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+.site-footer nav { display: flex; gap: 6px 20px; flex-wrap: wrap; }
+.site-footer a { color: var(--ink-soft); }
+
+/* Phones: the scan-to-order card is for desktop screens ------------- */
+
+@media (max-width: 819px) {
+  .slide-visual--qr { display: none; }
+}
+
+/* Larger screens ---------------------------------------------------- */
+
+@media (min-width: 820px) {
+  .hero .wrap { padding-top: 26px; padding-bottom: 12px; }
+  .slide { grid-template-columns: 1.3fr 1fr; gap: 32px; }
+  .slide-visual { justify-items: end; }
+  .bottle { width: 124px; }
+
+  .info { padding: 26px 0 30px; }
+  .info .wrap { grid-template-columns: 1fr 1.7fr; gap: 48px; align-items: start; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 16px 28px; }
+
+  .band .wrap { padding-top: 20px; padding-bottom: 20px; }
+  .qr { width: 120px; }
+}
